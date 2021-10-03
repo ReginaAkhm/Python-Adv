@@ -53,7 +53,7 @@ class Money:
     # нахождение процента от числа
     def __mod__(self, other):
         new_ruble = 0
-        new_penny = round((self.penny + self.ruble * 100) / 100 * 21)
+        new_penny = round((self.penny + self.ruble * 100) / 100 * other)
         return Money(new_ruble, new_penny)
 
     # конвертирование
@@ -62,11 +62,11 @@ class Money:
         response = requests.get(url)
         data_dict = json.loads(response.text)
         value = data_dict['Valute'][valute]['Value']
-        current = round((self.ruble + self.penny / 100) * value, 2)
+        current = round((self.ruble + self.penny / 100) / value, 2)
         print(f"~{current} {valute}")
 
 
-m1 = Money(20, 60)
+m1 = Money(20, 50)
 m2 = Money(1, 160)
 print(m1)
 print(m2)
